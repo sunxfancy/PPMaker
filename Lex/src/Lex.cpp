@@ -82,8 +82,11 @@ bool Lex::ReadConfig(const char* path) {
 
 void Lex::InitCore() {
     core = new DFACore();
+
     core->Init(mainDFA,pEClass);
 }
+
+
 
 
 DFA* Lex::combineAllDFA(){

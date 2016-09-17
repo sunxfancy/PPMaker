@@ -25,7 +25,7 @@ ADD_FLEX_BISON_DEPENDENCY(SCANNER PARSER)
 file(GLOB_RECURSE source_files ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 
 
-include_directories(includes ${CMAKE_CURRENT_BINARY_DIR} src Lex/include ../project/third-party/cereal-1.1.2)
+include_directories(includes ${CMAKE_CURRENT_BINARY_DIR} src Lex/include third-party/cereal-1.1.2)
 
 #win32 use local flex include
 if(WIN32)
