@@ -21,6 +21,3 @@ list(REMOVE_ITEM  source_files ${CMAKE_CURRENT_SOURCE_DIR}/src/Main.cpp)
 
 add_library(lex ${source_files})
 install(TARGETS lex DESTINATION bin)
-
-add_executable(lextest ${CMAKE_CURRENT_SOURCE_DIR}/src/Main.cpp)
-target_link_libraries(lextest lex exiconv iconv charsetdetect)

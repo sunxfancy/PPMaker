@@ -1,12 +1,12 @@
 PPMaker
 ============
 
-A lexer and parser table maker
+A lexer and parser table maker  
 
 ## Build
 
-platform: Linux or Mac 
-deps: git cmake-2.8 googletest
+platform: Linux or Mac   
+deps: git cmake-2.8 googletest  
 
 To install googletest, you can run the script:
 ```sh
@@ -16,7 +16,7 @@ To install googletest, you can run the script:
 
 ## Using
 
-You need two configures, which has defined the lexer rules and grammer rules in regexes and BNFs.
+You need two configures, which has defined the lexer rules and grammer rules in regexes and BNFs.  
 
 Here is a demo for lexer rules:
 ```
@@ -31,3 +31,7 @@ Here is a demo for lexer rules:
     other=[(){},;:]
     ignore=\s+
 ```
+
+## License
+
+MIT

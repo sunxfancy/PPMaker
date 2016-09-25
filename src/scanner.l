@@ -15,11 +15,11 @@ char* makescript(const char* data, int len);
 
 #ifdef _WIN32
 
-/*windows compatibility case*/  
+/*windows compatibility case*/
 #define YY_NO_UNISTD_H
-#include <io.h>  
-#define isatty _isatty  
-#define fileno _fileno  
+#include <io.h>
+#define isatty _isatty
+#define fileno _fileno
 
 #endif
 
@@ -30,9 +30,9 @@ char* makescript(const char* data, int len);
 
 %%
 
-"/*"([^\*]|(\*)*[^\*/])*(\*)*"*/" ; 
+"/*"([^\*]|(\*)*[^\*/])*(\*)*"*/" ;
 
-#[^\n]*\n				; /* ignore line comment */ 
+#[^\n]*\n				; /* ignore line comment */
 
 [ \t\v\n\f]             ; /* ignore blank token */
 
@@ -40,19 +40,21 @@ char* makescript(const char* data, int len);
 
 "{{"([^}]|\}[^}])*"}}"	SAVE_SCRIPT; return SCRIPT;
 
+"%{"([^%]|\%[^}])*"%}"	SAVE_SCRIPT; return INCLUDE;
+
 "e"						return 'e';
 
-":"						return ':'; 
+":"						return ':';
 
-"<"						return '<'; 
+"<"						return '<';
 
-">"						return '>'; 
+">"						return '>';
 
 "["						return '[';
 
 "]"						return ']';
 
-"="						return '='; 
+"="						return '=';
 
 "|"                     return '|';
 
@@ -61,6 +63,10 @@ char* makescript(const char* data, int len);
 "%left"					return LEFT;
 
 "%right"				return RIGHT;
+
+"%type"					return TYPE;
+
+
 
 [a-zA-Z_][a-zA-Z0-9_]*  SAVE_TOKEN; return ID;
 

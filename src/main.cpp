@@ -31,7 +31,6 @@ int main(int argc,const char *argv[])
         lex->Init();
 
 	    Parser* parser = Parser::NewLRParser();
-        
 	    parser->BuildParser(argv[2]);
 	}
 	return 0;

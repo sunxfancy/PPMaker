@@ -25,9 +25,9 @@ extern BNFParser* bnfparser;
 }
 
 
-%token <str> ID STRING SCRIPT LEFT RIGHT
+%token <str> ID STRING SCRIPT LEFT RIGHT INCLUDE TYPE
 
-%type <s> list item bnf_item bnf_list symbol_list symbol name
+%type <s> list item bnf_item bnf_list symbol_list symbol name type_def
 
 %start list
 
@@ -43,6 +43,8 @@ list : item { $$ = new State();  $$->AddChildrenState($1); root = $$; }
 item : bnf_item { $$ = $1; }
 	 | SCRIPT { $$ = new State(); $$->state_type = script; $$->script = $1; }
 	 | priority { $$ = NULL; }
+	 | type_def { $$ = NULL; }
+	 | INCLUDE { bnfparser->DefineInclude($1); }
 	 ;
 
 /* 一行bnf的定义 */
@@ -80,7 +82,9 @@ priority : LEFT { bnfparser->NowLeft(); }
 		 | priority STRING { bnfparser->AddToken($2); }
 		 ;
 
-
+type_def : TYPE ID { bnfparser->NowType($2); }
+		 | type_def ID { bnfparser->AddType($2); }
+		 ;
 
 %%
 

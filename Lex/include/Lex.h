@@ -12,6 +12,7 @@
 #include "LexInterface.h"
 #include <vector>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -68,7 +69,7 @@ private:
 	bool testequal(vector< int > , vector< int > );
     void addStopState(vector<int>&,int);
     void printvec(vector<int> v);
-
+	std::string cfg_filepath;
 	// ============================================
 	// member variable
 	// ============================================

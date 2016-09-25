@@ -41,6 +41,19 @@ void BNFParser::NowRight() {
 	now_associativity = false;
 }
 
+void BNFParser::NowType(const char* token) {
+	now_type = token;
+}
+
+void BNFParser::AddType(const char* token) {
+	type_map[token] = now_type;
+}
+
+void BNFParser::DefineInclude(const char* include) {
+
+}
+
+
 void BNFParser::AddToken(const char* token) {
 	precedence_map.insert(make_pair(token, now_precedence));
 	associativity_map.insert(make_pair(token, now_associativity));

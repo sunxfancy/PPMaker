@@ -27,6 +27,8 @@ void Lex::Init(const char* pData){
     // init the lex system
     this->pEClass = ruleManager->getEClass();
     combineAllDFA();
+	string path = cfg_filepath+".lexsave";
+	mainDFA->Save(path.c_str());
     InitCore();
     if (pData != NULL) setData(pData);
 }
@@ -58,6 +60,7 @@ const char* Lex::getRule(int id) {
 }
 
 bool Lex::ReadConfig(const char* path) {
+	cfg_filepath = path;
     fstream cfgFile;
     cfgFile.open(path);//打开文件
     if(!cfgFile.is_open())
@@ -82,7 +85,6 @@ bool Lex::ReadConfig(const char* path) {
 
 void Lex::InitCore() {
     core = new DFACore();
-
     core->Init(mainDFA,pEClass);
 }
 
