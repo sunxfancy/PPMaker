@@ -1,12 +1,12 @@
 const int a = 3;
-function test() {
+void test() {
 	const int pi = 3;
 	int a = 5;
 	a = a * pi;
 	write(a);
 }
 
-function main() {
+void main() {
 	test();
 	write(a * 2);
 	return 0;

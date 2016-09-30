@@ -44,7 +44,7 @@ item : bnf_item { $$ = $1; }
 	 | SCRIPT { $$ = new State(); $$->state_type = script; $$->script = $1; }
 	 | priority { $$ = NULL; }
 	 | type_def { $$ = NULL; }
-	 | INCLUDE { bnfparser->DefineInclude($1); }
+	 | INCLUDE { $$ = NULL; bnfparser->DefineInclude($1); }
 	 ;
 
 /* 一行bnf的定义 */

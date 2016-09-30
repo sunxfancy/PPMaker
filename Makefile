@@ -5,4 +5,7 @@ all:
 maker:
 	-cd build && make maker
 
-.PHONY: all maker
+run:
+	-./bin/maker ./Config/lex.cfg ./Config/parser.cfg
+
+.PHONY: all maker run
