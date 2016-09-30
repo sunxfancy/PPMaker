@@ -4,6 +4,7 @@
 #include "Grammer_Node.h"
 #include <cereal/archives/json.hpp>
 #include "LexInterface.h"
+#include "Codegen.h"
 
 LR_parser::LR_parser()
 {
@@ -156,6 +157,11 @@ void LR_parser::BuildParser()
 void LR_parser::BuildParser(const char* filename) {
     AddBNF(filename);
     BuildParser();
+
+    // add codegen
+    Codegen gen(bnfparser, bnflist);
+    gen.addAll();
+    gen.getOutput();
 }
 
 

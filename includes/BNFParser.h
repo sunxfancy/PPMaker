@@ -12,6 +12,7 @@
 #include "State.h"
 #include "VMap.h"
 #include <map>
+#include <string>
 
 using namespace std;
 
@@ -41,6 +42,8 @@ public:
 	// for debug
 	void printTree();
 
+	const string& getType(const string& name);
+
 private:
 	State* state_root;
 
@@ -58,6 +61,8 @@ private:
 
 	string now_type;
 	std::map<string, string> type_map;
+
+	string definition;
 	// for debug
 	void printNode(State* s,int d);
 };

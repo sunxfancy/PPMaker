@@ -50,7 +50,8 @@ void BNFParser::AddType(const char* token) {
 }
 
 void BNFParser::DefineInclude(const char* include) {
-
+	definition += include;
+	definition += "\n";
 }
 
 
@@ -79,6 +80,12 @@ bool BNFParser::getAssociativity(int id) {
 	const auto& p = id_associativity_map.find(id);
 	if (p != id_associativity_map.end()) return p->second;
 	return false;
+}
+
+const string& BNFParser::getType(const string& name) {
+	auto p = type_map.find(name);
+	if (p == type_map.end()) return "";
+	return p->second;
 }
 
 void BNFParser::printNode(State* s,int d)
