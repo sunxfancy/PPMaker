@@ -43,7 +43,9 @@ public:
 	void printTree();
 
 	const string& getType(const string& name);
-
+	const string& getInclude() {
+		return definition;
+	}
 private:
 	State* state_root;
 

@@ -5,6 +5,7 @@
 #include <cereal/archives/json.hpp>
 #include "LexInterface.h"
 #include "Codegen.h"
+#include <fstream>
 
 LR_parser::LR_parser()
 {
@@ -161,7 +162,10 @@ void LR_parser::BuildParser(const char* filename) {
     // add codegen
     Codegen gen(bnfparser, bnflist);
     gen.addAll();
-    gen.getOutput();
+    ofstream out(string(filename) + ".cpp");
+    out << gen.getOutput();
+    out.flush();
+    out.close();
 }
 
 
