@@ -44,7 +44,10 @@ void Codegen::addAll() {
     data += parser->getInclude();
     data += begin;
     for (BNF* p : bnfs) {
-        addScript(p->getID(), p->getScript(), p);
+        if (p->getScript() == nullptr)
+            addScript(p->getID(), "", p);
+        else
+            addScript(p->getID(), p->getScript(), p);
     }
     data += end;
 }
