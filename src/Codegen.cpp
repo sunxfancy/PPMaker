@@ -4,12 +4,14 @@
 #include "BNFParser.h"
 const char* Codegen::begin =
     "#include <vector>\n"
-    "const void* __ppp_script(int __bnf_num, const std::vector<void*>& __args) {\n"
+    "extern \"C\" {\n"
+    "extern const void* __ppp_script(int __bnf_num, const std::vector<void*>& __args) {\n"
     "\tswitch(__bnf_num) {\n";
 
 const char* Codegen::end =
     "\tdefault: return nullptr;\n"
     "\t}\n"
+    "}\n"
     "}\n";
 
 

@@ -2,7 +2,8 @@
 class Node;
 
 #include <vector>
-const void* __ppp_script(int __bnf_num, const std::vector<void*>& __args) {
+extern "C" {
+extern const void* __ppp_script(int __bnf_num, const std::vector<void*>& __args) {
 	switch(__bnf_num) {
 case 0:{
 const Node* v = (const Node*)(__args[0]);
@@ -780,4 +781,5 @@ return nullptr;
 }
 	default: return nullptr;
 	}
+}
 }

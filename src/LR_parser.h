@@ -74,7 +74,7 @@ private:
     void save_log();
 
     friend class cereal::access;
-
+    
     template<class Archive>
     void serialize(Archive &ar)
     {

@@ -30,15 +30,19 @@ public:
 
     void Save(const char* path);
     void Load(const char* path); // 需要新建一个对象,然后执行Load方法
-private:
-    void BuildReduce(int id,const set<Item>& itemset);
-    bool PdPriority(int id, int c, const Item& item);
-    BNFParser* bnfparser;
-    
+    void Load(std::istream& is);
+
     // 经过调整的总数，包含结束符0
     int constSum; // Vt的总数
     int stateSum; // 状态的总数
     int VSum;     // V的总数
+    vector <int> bnf_size; // 每条bnf范式的长度
+    vector <int> bnf_Vn; // 每条bnf范式的长度
+
+private:
+    void BuildReduce(int id,const set<Item>& itemset);
+    bool PdPriority(int id, int c, const Item& item);
+    BNFParser* bnfparser;
 
     vector < vector <int> > Goto;
     vector < vector <char> > Action;
@@ -47,7 +51,7 @@ private:
     template<class Archive>
     void serialize(Archive &ar)
     {
-        ar( constSum, stateSum, VSum, CEREAL_NVP(Goto), CEREAL_NVP(Action) ); // serialize things by passing them to the archive
+        ar( constSum, stateSum, VSum, CEREAL_NVP(Goto), CEREAL_NVP(Action), CEREAL_NVP(bnf_size), CEREAL_NVP(bnf_Vn) ); // serialize things by passing them to the archive
     }
 };
 
