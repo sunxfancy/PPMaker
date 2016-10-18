@@ -1,10 +1,8 @@
-#include <stdint.h>
+extern char lex_data[]      __asm__ ("_binary_lex_cfg_lexsave_start");
+extern char lex_data_end[]  __asm__ ("_binary_lex_cfg_lexsave_end");
 
-extern uint8_t lex_data[]     asm("_binary_lex_cfg_lexsave_start");
-extern uint8_t lex_data_end[] asm("_binary_lex_cfg_lexsave_end");
-
-extern uint8_t parser_data[]     asm("_binary_parser_cfg_lrsave_start");
-extern uint8_t parser_data_end[] asm("_binary_parser_cfg_lrsave_end");
+extern char parser_data[]  __asm__ ("_binary_parser_cfg_lrsave_start");
+extern char parser_data_end[]  __asm__ ("_binary_parser_cfg_lrsave_end");
 
 typedef const char* (*getLexTable_t)();
 typedef const char* (*getLALRTable_t)();

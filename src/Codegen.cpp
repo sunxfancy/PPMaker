@@ -3,8 +3,9 @@
 #include <string>
 #include "BNFParser.h"
 const char* Codegen::begin =
-    "void* __ppp_script(int x) {\n"
-    "\tswitch(x) {\n";
+    "#include <vector>\n"
+    "const void* __ppp_script(int __bnf_num, const std::vector<void*>& __args) {\n"
+    "\tswitch(__bnf_num) {\n";
 
 const char* Codegen::end =
     "\tdefault: return nullptr;\n"
@@ -25,14 +26,16 @@ void Codegen::addScript(int x, const std::string& script, BNF* bnf) {
         if (s->state_var != NULL) {
             string type = parser->getType(s->state_class);
             if (type == "") type = "char";
+            data += "const ";
             data += type;
             data += "* ";
             data += s->state_var;
             data += " = (";
+            data += "const ";
             data += type;
-            data += "*)getArgs(";
+            data += "*)(__args[";
             data += to_string(p);
-            data += ");\n";
+            data += "]);\n";
         }
         p++;
     }

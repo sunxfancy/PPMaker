@@ -52,7 +52,6 @@ private:
 
     VMap vmap;
 
-
     // LR分析表
     LRTable* table;
 

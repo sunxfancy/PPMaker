@@ -1,10 +1,14 @@
 all: parser.so
 
 parser.cfg.o : parser.cfg.cpp
-	clang++ -std=c++11 -fPIC -IModel $< -o $@
+	clang++ -std=c++11 -fPIC -IModel -c $< -o $@
 
 func.o : func.c
-	clang -fPIC $< -o $@
+	clang -std=c11 -fPIC -c $< -o $@
 
-parser.so : parser.cfg.o lex.cfg.lexsave parser.cfg.lrsave
+parser.so : parser.cfg.o func.o lex.cfg.lexsave parser.cfg.lrsave
 	clang++ parser.cfg.o func.o -Wl,--format=binary -Wl,lex.cfg.lexsave -Wl,parser.cfg.lrsave -Wl,--format=default -shared -o parser.so
+
+clean:
+	-rm -rf parser.cfg.o func.o parser.so
+.PHONY: clean
