@@ -37,7 +37,7 @@ public:
     int stateSum; // 状态的总数
     int VSum;     // V的总数
     vector <int> bnf_size; // 每条bnf范式的长度
-    vector <int> bnf_Vn; // 每条bnf范式的长度
+    vector <int> bnf_Vn; // 规约到的Vn
 
 private:
     void BuildReduce(int id,const set<Item>& itemset);

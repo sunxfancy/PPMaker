@@ -7,5 +7,6 @@ maker:
 
 run:
 	-./bin/maker ./Config/lex.cfg ./Config/parser.cfg
+	-cd Config/ && make
 
 .PHONY: all maker run

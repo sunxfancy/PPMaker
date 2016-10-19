@@ -150,6 +150,12 @@ void LR_parser::BuildParser()
     // 打印graphviz图
 
     LALRTable* lalr_table = new LALRTable(vmap.constMax+1, vec.size(), vmap.constSize, bnfparser);
+    printf("Size: %d\n", bnflist.size());
+    for (auto* bnf : bnflist) {
+        lalr_table->bnf_size.push_back(bnf->getBNFdata().size());
+        lalr_table->bnf_Vn.push_back(bnf->getRoot()->id);
+    }
+
     lalr_table->BuildTable(vec);
     lalr_table->Save(save_filepath.c_str());
     table = (LRTable*) lalr_table;
