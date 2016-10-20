@@ -155,9 +155,10 @@ void LR_parser::BuildParser()
         lalr_table->bnf_size.push_back(bnf->getBNFdata().size());
         lalr_table->bnf_Vn.push_back(bnf->getRoot()->id);
     }
-
+    lalr_table->vmap = &vmap;
     lalr_table->BuildTable(vec);
     lalr_table->Save(save_filepath.c_str());
+    lalr_table->printTable();
     table = (LRTable*) lalr_table;
 }
 

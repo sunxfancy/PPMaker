@@ -10,7 +10,7 @@
 
 #include "LRTable.h"
 #include "BNFParser.h"
-
+#include "VMap.h"
 #include <cereal/types/vector.hpp>
 
 class LALRTable : public LRTable
@@ -39,6 +39,7 @@ public:
     vector <int> bnf_size; // 每条bnf范式的长度
     vector <int> bnf_Vn; // 规约到的Vn
 
+    VMap* vmap; // VMap映射表
 private:
     void BuildReduce(int id,const set<Item>& itemset);
     bool PdPriority(int id, int c, const Item& item);
@@ -51,7 +52,7 @@ private:
     template<class Archive>
     void serialize(Archive &ar)
     {
-        ar( constSum, stateSum, VSum, CEREAL_NVP(Goto), CEREAL_NVP(Action), CEREAL_NVP(bnf_size), CEREAL_NVP(bnf_Vn) ); // serialize things by passing them to the archive
+        ar( constSum, stateSum, VSum, CEREAL_NVP(Goto), CEREAL_NVP(Action), CEREAL_NVP(bnf_size), CEREAL_NVP(bnf_Vn), *vmap ); // serialize things by passing them to the archive
     }
 };
 
