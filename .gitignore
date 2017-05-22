@@ -2,6 +2,7 @@
 .fuse*
 *.sublime-*
 *.lrsave
-./bin/
+bin/
 build/
-
+.idea/
+cmake-build-debug/

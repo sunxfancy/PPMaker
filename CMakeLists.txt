@@ -1,12 +1,13 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(scanner)
+project(PPMaker)
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
 
 SET (CMAKE_CXX_FLAGS "-std=c++11")
 SET (EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 # 依赖项
-add_subdirectory(ExIconv)
 add_subdirectory(Lex)
 
 # bison and flex
@@ -39,4 +40,5 @@ link_directories(${CMAKE_CURRENT_SOURCE_DIR}/ExIconv/extlib/lib)
 
 add_executable(maker ${source_files}
 	${BISON_PARSER_OUTPUTS} ${FLEX_SCANNER_OUTPUTS}) # 使用动态库
-TARGET_LINK_LIBRARIES(maker lex exiconv iconv charsetdetect charset)
+TARGET_LINK_LIBRARIES(maker lex ${CONAN_LIBS})
+
