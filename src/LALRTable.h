@@ -39,6 +39,9 @@ public:
     vector <int> bnf_size; // 每条bnf范式的长度
     vector <int> bnf_Vn; // 规约到的Vn
 
+    vector < vector<int> > bnfs;
+    vector < vector<int> > bnf_from;
+
     VMap* vmap; // VMap映射表
 private:
     void BuildReduce(int id,const set<Item>& itemset);
