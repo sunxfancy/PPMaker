@@ -15,10 +15,10 @@
 
 class LALRTable : public LRTable
 {
-
 public:
-    LALRTable(int _constSum, int _stateSum, int _VSum, BNFParser* bnfparser);
+    LALRTable();
     LALRTable(const LALRTable& other);
+    LALRTable(int _constSum, int _stateSum, int _VSum, BNFParser* bnfparser);
     virtual ~LALRTable();
     LALRTable& operator=(const LALRTable& other);
     bool operator==(const LALRTable& other);
@@ -37,7 +37,7 @@ public:
     int stateSum; // 状态的总数
     int VSum;     // V的总数
     vector <int> bnf_size; // 每条bnf范式的长度
-    vector <int> bnf_Vn; // 规约到的Vn
+    vector <int> bnf_Vn; // 每条bnf范式的长度
 
     vector < vector<int> > bnfs;
     vector < vector<int> > bnf_from;
@@ -55,9 +55,12 @@ private:
     template<class Archive>
     void serialize(Archive &ar)
     {
-        ar( constSum, stateSum, VSum, CEREAL_NVP(Goto), CEREAL_NVP(Action), CEREAL_NVP(bnf_size), CEREAL_NVP(bnf_Vn), *vmap ); // serialize things by passing them to the archive
+        // serialize things by passing them to the archive
+        ar( constSum, stateSum, VSum,
+            CEREAL_NVP(Goto), CEREAL_NVP(Action),
+            CEREAL_NVP(bnf_size), CEREAL_NVP(bnf_Vn),
+            CEREAL_NVP(bnfs), CEREAL_NVP(bnf_from), *vmap ); // serialize things by passing them to the archive
     }
 };
-
 
 #endif // LALR_TABLE_H

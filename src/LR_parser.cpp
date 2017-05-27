@@ -151,9 +151,9 @@ void LR_parser::BuildParser()
 
     LALRTable* lalr_table = new LALRTable(vmap.constMax+1, vec.size(), vmap.constSize, bnfparser);
     printf("Size: %d\n", bnflist.size());
+    vmap.printAll();
 
-
-    lalr_table->bnf_from.resize(bnflist.size());
+    lalr_table->bnf_from.resize(bnflist.size()+1);
     for (auto* bnf : bnflist) {
         lalr_table->bnf_size.push_back(bnf->getBNFdata().size());
         lalr_table->bnf_Vn.push_back(bnf->getRoot()->id);
@@ -161,11 +161,17 @@ void LR_parser::BuildParser()
         std::vector<int> temp;
         for (auto* i : bnf->getBNFdata()) {
             temp.push_back(i->id);
-            lalr_table->bnf_from[i->id].push_back(bnf->getRoot()->id);
         }
         lalr_table->bnfs.push_back(temp);
     }
 
+    lalr_table->bnf_from.resize(vec.size());
+    for (auto* p : vec) {
+        for (auto i: p->getItems())
+        {
+            lalr_table->bnf_from[i.getBNF()->getID()].push_back(p->getID());
+        }
+    }
 
 
     lalr_table->vmap = &vmap;
